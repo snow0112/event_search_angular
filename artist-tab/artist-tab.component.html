@@ -1,0 +1,7 @@
+<div *ngFor="let artist of ArtistList">
+	<app-reusableartist [artistname] = "artist.name" [music] = "music" ></app-reusableartist>
+</div>
+
+<div *ngIf="NoRecord">
+	<app-emptydata></app-emptydata>
+</div>

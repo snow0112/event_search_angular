@@ -1,0 +1,34 @@
+
+<div style="width: 80%; margin: auto;">
+
+<h3 style="text-align: center;"> {{Title}} </h3>
+
+
+   <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#home">Event</a></li>
+    <li><a data-toggle="tab" href="#menu1">{{artistteam()}}</a></li>
+    <li><a data-toggle="tab" href="#menu2">Venue</a></li>
+    <li><a data-toggle="tab" href="#menu3">{{upcomingevent()}}</a></li>
+  </ul>
+
+  <div class="tab-content">
+
+    <div id="home" class="tab-pane fade in active">
+      <app-event-tab></app-event-tab>      
+    </div>
+
+    <div id="menu1" class="tab-pane fade">
+      <app-artist-tab></app-artist-tab>
+    </div>
+
+    <div id="menu2" class="tab-pane fade">
+      <app-venue-tab></app-venue-tab>
+    </div>
+
+    <div id="menu3" class="tab-pane fade">
+      <app-upcoming-tab></app-upcoming-tab>
+    </div>
+
+  </div>
+</div>
+

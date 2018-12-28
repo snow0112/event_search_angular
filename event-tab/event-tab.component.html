@@ -1,0 +1,66 @@
+
+<div *ngIf="pgbar">
+<app-progbar></app-progbar>
+</div>
+<div *ngIf="EmptyData">
+<app-emptydata></app-emptydata>
+</div>
+<div *ngIf="GotERR">
+<app-err-mag></app-err-mag>
+</div>
+
+<div class="container"  style="width: 100%">
+<div class="table-responsive">
+<table class="table">
+	<tr *ngIf="row_artist"><th>Artist/Team(s)</th>
+	<td>{{attractions[0].name}}
+		<div *ngFor="let artist of attractions; let i = index" style="display: inline;">
+			<div *ngIf="i>0" style="display: inline;" > | {{attractions[i].name}} </div></div>
+		</td></tr>
+		<tr *ngIf="row_venue"><th>Venue</th>
+		<td> {{venue}} </td></tr>
+		<tr *ngIf="row_time"><th>Time</th>
+		<td> {{date | date}}  {{time}} </td></tr>
+		<tr *ngIf="row_category"><th>Category</th>
+		<td> {{genre}} | {{segment}} </td></tr>
+		<tr *ngIf="row_price"><th>Price Range</th>
+		<td> ${{EventDetail.priceRanges[0].min | number:'1.2-2'}} ~ ${{EventDetail.priceRanges[0].max | number:'1.2-2'}} </td></tr>
+		<tr *ngIf="row_status"><th>Ticket Status</th>
+		<td> {{status}} </td></tr>
+		<tr *ngIf="row_buy"><th>Buy Ticket At</th>
+		<td> <a href="{{buyurl}}" target="_blank">Ticketmaster</a> </td></tr>
+		<tr *ngIf="seatmap"><th>Seat Map</th>
+		<td>
+			<button type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal" style="padding: 0">View Seat Map Here</button>
+		</td></tr>
+	</table>
+</div>
+
+
+<!-- The Modal -->
+<div class="modal" id="myModal" >
+  <div class="modal-dialog" style="z-index: 100000">
+    <div class="modal-content" >
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title"><b>View Seat Map</b></h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+      	<p>  </p>
+      	<a href="{{seatmap}}">
+        <img src="{{seatmap}}" class = "in-modal-img"></a>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+</div>

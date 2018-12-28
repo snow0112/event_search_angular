@@ -1,0 +1,18 @@
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+.mat-focused .placeholder {
+    color: transparent;
+}
+
+.material-icons {
+ vertical-align:bottom;
+}
+
+.firstformbox{
+	width: 80%; 
+	margin: 20px auto 20px auto; 
+	padding: 20px; 
+	border: solid #808080 2px;
+	border-radius: 30px;
+
+}

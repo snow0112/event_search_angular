@@ -1,0 +1,68 @@
+<div *ngIf="pgbar">
+<app-progbar></app-progbar>
+</div>
+<div *ngIf="EmptyData">
+<app-emptydata></app-emptydata>
+</div>
+<div *ngIf="GotERR">
+<app-err-mag></app-err-mag>
+</div>
+<div *ngIf="HaveData">
+
+<br>
+<form [formGroup] = "sortForm" class="form-inline">
+
+
+			<select type="select" class="form-control custom-select mb-2 mr-sm-2 mb-sm-0 " id="sortby" formControlName="sortby">
+				<option id = "default" value = "Default" selected="true">Default</option>
+				<option id = "eventname" value = "EventName">Event Name</option>
+				<option id = "time" value = "Time">Time</option>
+				<option id = "artist" value = "Artist">Artist</option>
+				<option id = "type" value  = "Type">Type</option>
+			</select>
+
+
+
+
+			<select type ="select" class="form-control custom-select mb-2 mr-sm-2 mb-sm-0 " id="ascend" formControlName="ascend" disabled="true">
+				<option id = "Ascending" value = "Ascending" selected="true" >Ascending</option>
+				<option id = "Decending" value  = "Decending" >Decending</option>
+			</select>
+
+
+</form>
+<br>
+
+<div>
+	<div *ngFor="let event of UpComingEvents ; let i = index">
+		<mat-card *ngIf="i<5">
+		
+		<a href="{{event.uri}}" target="_blank">
+			<mat-card-subtitle><div style="color:blue; display: inline;">{{event.displayName}}</div></mat-card-subtitle></a>
+		<div style="color:orange; display: inline;">Artist: {{event.performance[0].displayName}}   </div>  
+		<div style="color:gray; display: inline;">{{event.start.date | date }} {{event.start.time}}</div>
+		<p>Type: {{event.type}}</p>
+		</mat-card>
+		<br *ngIf="i<5">
+	</div>
+	
+	<div [@morecards]="statename" style="display: block">
+		<div  *ngFor="let event of UpComingEvents ; let i = index">
+			<mat-card  *ngIf="i>5">
+			<a href="{{event.uri}}" target="_blank">
+			<mat-card-subtitle><div style="color:blue; display: inline;">{{event.displayName}}</div></mat-card-subtitle></a>
+			<div style="color:orange; display: inline;">Artist: {{event.performance[0].displayName}}   </div>  
+			<div style="color:gray; display: inline;">{{event.start.date | date }} {{event.start.time}}</div>
+			<p>Type: {{event.type}}</p>
+			</mat-card>
+			<br *ngIf="i>5">
+		</div>
+
+		
+	</div>
+</div>
+<div class='btns'>
+<button class="btn btn-primary" id="showmore" (click) = "showmore()" *ngIf="!Showmore">Show More</button>
+<button class="btn btn-primary" id="showless" (click) = "showless()" *ngIf="Showmore">Show Less</button>
+</div>
+</div>

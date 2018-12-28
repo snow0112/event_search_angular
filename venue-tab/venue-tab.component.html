@@ -1,0 +1,43 @@
+<div *ngIf="pgbar">
+<app-progbar></app-progbar>
+</div>
+
+<div *ngIf="EmptyData">
+<app-emptydata></app-emptydata>
+</div>
+
+<div *ngIf="GotERR">
+<app-err-mag></app-err-mag>
+</div>
+
+<div *ngIf="HaveData">
+<div class="container" *ngIf="venueshow" style="width: 100%">
+	<h3 style="text-align: center;"> {{name}} </h3>
+	<div class="table-responsive">
+		<table class="table">
+			<tr *ngIf="row_address" ><th>Address</th>
+			<td> {{address}} </td></tr>
+
+			<tr *ngIf="row_city"><th>City</th>
+			<td> {{city}} , {{state}} </td></tr>
+
+			<tr  *ngIf="row_phone"><th>Phone Number</th>
+			<td> {{phone}} </td></tr>
+
+			<tr *ngIf="row_hour"><th>Open Hours</th>
+			<td> {{hour}} </td></tr>
+
+			<tr *ngIf="row_general"><th>General Rule</th>
+			<td> {{generalrule}} </td></tr>
+
+			<tr *ngIf="row_child" colspan="2"><th>Child Rule</th>
+			<td> {{childrule}} </td></tr>
+
+		</table>
+	</div>
+</div>
+</div>
+<div #map class="gMap"></div>
+
+
+

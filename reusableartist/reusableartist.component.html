@@ -1,0 +1,77 @@
+<h3 style="text-align: center;"> {{ artistname }} </h3>
+
+<div *ngIf="pgbar_m">
+<app-progbar></app-progbar>
+</div>
+<div *ngIf="EmptyData_m">
+<app-emptydata></app-emptydata>
+</div>
+<div *ngIf="GotERR_m">
+<app-err-mag></app-err-mag>
+</div>
+<div *ngIf="HaveData_m">
+
+
+<div class="container" *ngIf="music">
+	<div class="table-responsive">
+		<table class="table">
+			<tr><th>Name</th>
+			<td> {{ArtistMusic[0].name}} </td></tr>
+			<tr><th>Followers</th>
+			<td> {{ArtistMusic[0].followers.total | number}} </td></tr>
+			<tr><th>Popularity</th>
+			<td> <div class='roundBar'><round-progress [current]="ArtistMusic[0].popularity" [max]="100" [color]="'#008800'" [radius]="22" [stroke]="4"
+			 [clockwise]="false"></round-progress><div class='barText'>{{ArtistMusic[0].popularity}}</div></div> </td></tr>
+			<tr><th>Check at</th>
+			<td>  <a href="{{ArtistMusic[0].external_urls.spotify}}" target="_blank"> Spotify</a>   </td></tr>
+		</table>
+	</div>
+</div>
+
+<div class="table-responsive" *ngIf="false">
+	<table class="table" style="width: 80%">
+	<tr *ngFor="let photo of ArtistPhoto ; let i = index">
+		<img src="{{ArtistPhoto[i].link}}" style="width: 30%; height: auto; display:inline; ">
+	</tr>
+	</table>
+</div>
+
+</div>
+
+
+<div *ngIf="pgbar_p">
+<app-progbar></app-progbar>
+</div>
+<div *ngIf="EmptyData_p">
+<app-emptydata></app-emptydata>
+</div>
+<div *ngIf="GotERR_p">
+<app-err-mag></app-err-mag>
+</div>
+<div *ngIf="HaveData_p">
+<div class="row"> 
+
+  <div class="column">
+  <div *ngFor="let artist of ArtistPhoto; let i = index">
+    <div *ngIf="i == 0 || i== 3 || i== 6">
+  	<a href="{{artist.link}}" class = "photo">
+    <img src="{{artist.link}}" style="width:100%"></a>
+  </div></div></div>
+
+  <div class="column">
+  <div *ngFor="let artist of ArtistPhoto; let i = index">
+    <div *ngIf="i == 1 || i== 4 || i== 7">
+    <a href="{{artist.link}}" class = "photo">
+    <img src="{{artist.link}}" style="width:100%"></a>
+  </div></div></div>
+
+  <div class="column">
+  <div *ngFor="let artist of ArtistPhoto; let i = index">
+    <div *ngIf="i == 2 || i== 5">
+    <a href="{{artist.link}}" class = "photo">
+    <img src="{{artist.link}}" style="width:100%"></a>
+  </div></div></div>
+
+</div>
+
+</div>

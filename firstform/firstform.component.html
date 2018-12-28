@@ -1,0 +1,88 @@
+
+
+<div class = "firstformbox">
+    <h4 style="text-align: center"><strong> Entertainment Event Ticket Search </strong></h4>
+    <form [formGroup] = "myForm" (ngSubmit)="onSubmit()" style="margin: auto">
+      <div style="width: 70%; margin: auto;">
+
+      <div calss = "from-group row">
+        <label for = "Keyword" class="col-sm-2 col-form-label requiredField">Keyword <div style="color: red; display: inline;">*</div>  </label>
+        <div>
+           <mat-form-field class="col-sm-10" appearance = "outline">
+            <input matInput [matAutocomplete]="auto" formControlName="keyword" 
+            [ngClass]="{'is-invalid': myForm.get('keyword').errors && myForm.get('keyword').errors.required && myForm.get('keyword').touched}" 
+            placeholder="Enter Artist, Team or Event Name (e.g. Lakers)">
+            <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let option of AutoOptionsName" [value]="option">{{option}}</mat-option>
+          </mat-autocomplete>
+      <div *ngIf="myForm.get('keyword').errors">
+        <mat-error style='color:red' *ngIf="myForm.get('keyword').errors.required && myForm.get('keyword').touched">
+          Please enter a keyword</mat-error>
+      </div>
+          </mat-form-field>
+          
+      
+        </div>
+      </div>
+           <div calss = "from-group row">
+        <label for = "Category" class="col-sm-2 col-form-label">Category</label>
+        <div class="col-sm-10">
+          <select type="Category" class="form-control" id="Category" formControlName="category">
+            <option id = "default" value = "All" selected="true">All</option>
+            <option id = "music" value = "Music">Music</option>
+            <option id = "sport" value = "Sports">Sports</option>
+            <option id = "arts" value = "Arts">Arts</option>
+            <option id = "theater" value  = "Theater">Theater</option>
+            <option id = "film" value = "Film">Film</option>
+            <option id = "miscellaneous" value = "Miscellaneous">Miscellaneous</option>
+          </select>
+        </div>
+      </div>
+
+
+
+      <div calss = "from-group row">
+        <label for = "Distance" class="col-sm-2 col-form-label" >Distance</label>
+        <div class="col-sm-5">
+          <input type="Distance" class="form-control" id="Distance" placeholder="10" formControlName="distance">
+        </div>
+        <div class="col-sm-5">
+          <div calss = "from-group">
+            <select class="form-control" id="length" formControlName="dunit">
+              <option id = "Mile" value = "miles" selected="true" >Miles</option>
+              <option id = "Km" value = "km">Kilometer</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="from-group form-check row" style="width: 100%; margin: auto;">
+        <label for = "from" class="col-sm-2 col-form-label" >From <div style="color: red; display: inline;">*</div> </label>
+        <div class="col-sm-10" >
+          <input class="form-check-input" type="radio" name="fromwhere" id="CurrentLocation" value="CurrentLocation" (click)="chooseHere()"  [checked]='hereornot()' >
+          <label class="form-check-label" for="CurrentLocation">Current location</label><br>
+          <input class="form-check-input" type="radio" name="fromwhere" id="OtherLocation" value="OtherLocation" (click)="chooseOther()" >
+          <label class="form-check-label" for="OtherLocation">Other, Please specify:</label>
+          <div calss = "from-group">
+      <input type="Location" class="form-control" id="Location" formControlName="specifiedlocation" [ngClass]="{'is-invalid': myForm.get('specifiedlocation').errors && myForm.get('specifiedlocation').errors.required &&
+      myForm.get('specifiedlocation').touched}" disabled="true" >
+      <div *ngIf="myForm.get('specifiedlocation').errors">
+        <div style='color:red' *ngIf="myForm.get('specifiedlocation').errors.required && myForm.get('specifiedlocation').touched">
+          Please enter a keyword</div></div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top: 20px; ">
+      <button id = "search" class="btn btn-primary" type="submit" [disabled]="!CurrentLat || !myForm.valid">
+      <i class="material-icons">search</i>Submit</button>
+      <button id = "reset" type = "button" class="btn btn-primary" (click)="clean()">
+        <i class="material-icons md-18">clear_all</i>Clear</button>
+      </div>
+      </div>
+    </form>
+
+<div>
+
+
+
+

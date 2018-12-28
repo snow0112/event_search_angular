@@ -1,0 +1,113 @@
+<div style="width: 80%; margin: auto;">
+  <ul class="nav nav-pills">
+    <li class="active" id="ResultTab"><a data-toggle="pill" href="#result">Result</a></li>
+    <li (click)="MakeFavList()" id="FavTab"> <a data-toggle="pill" href="#favorite">Favorite</a></li>
+  </ul>
+
+    <div [@resultstate]="resultstate" style="display: block">
+      <div *ngIf="!detailpage">
+        
+      <div *ngIf="HaveData || pgbar || EmptyData || GotERR">
+        <button class="btn btn-primary" [disabled]="disabledetail" (click) = "showdetailpage()">Details
+          <i class="material-icons">keyboard_arrow_right</i></button>
+<div class="tab-content">
+
+
+    <div id="result" class="tab-pane fade in active">
+        
+        <div *ngIf="HaveData">
+            <div class="container" style="width: 100%">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Date</th>
+                      <th>Event</th>
+                      <th>Category</th>
+                      <th>Venu Info</th>
+                      <th>Favorite</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let event of EvevtList; let i = index" [attr.data-index] = "i" [attr.id] = "'result-table-'+i" class="{{Ifhightlight(event)}}">
+                      <td  >{{i+1}}</td>
+                      <td  >{{Localdate(event)}}</td>
+                      <td><button class="eventname" mat-raised-button matTooltip={{event.name}}
+                      (click)="highlight(event,'result-table-'+i)" >{{event.name | eventNamePipe}}</button> </td>
+                      <td  >{{classifications(event)}}</td>
+                      <td  >{{Venue(event)}}</td>
+                      <!--<i class="material-icons">
+                        star_border
+                      </i>-->
+                      <td (click)="favorite(event,'result-star-'+i)" [attr.id] = "'result-star-'+i" ><i class="material-icons">{{whichstar(event)}}</i></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="pgbar"><app-progbar></app-progbar></div>
+        <div *ngIf="EmptyData"><app-emptydata></app-emptydata></div>
+      <div *ngIf="GotERR"><app-err-mag></app-err-mag></div>
+
+  </div>
+
+
+  <div id="favorite" class="tab-pane fade">
+    <div class="container">
+      <div class="table-responsive">
+        <div *ngIf="HaveFav()">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Date</th>
+                <th>Event</th>
+                <th>Category</th>
+                <th>Venu Info</th>
+                <th>Favorite</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let event of FavoriteList; let j = index" [attr.data-index] = "'favorite-table-'+j" class="{{Ifhightlight(event)}}">
+                <td *ngIf="isfav(event)" >{{j+1}}</td>
+                <td *ngIf="isfav(event)" >{{event.dates.start.localDate}}</td>
+                <td *ngIf="isfav(event)" ><button class="eventname" mat-raised-button matTooltip={{event.name}}
+                (click)="highlight(event,'favorite-table-'+j)" >{{event.name | eventNamePipe}}</button> </td>
+                <td *ngIf="isfav(event)" >{{event.classifications[0].segment.name}}-{{event.classifications[0].genre.name}}</td>
+                <td *ngIf="isfav(event)" >{{event._embedded.venues[0].name}}</td>
+                <td *ngIf="isfav(event)" (click)="Trash(event)"><i  class="material-icons">delete</i></td>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div *ngIf="!HaveFav()">
+        <app-emptydata></app-emptydata>
+      </div>
+
+    </div>
+  </div>
+</div>
+  </div>
+
+</div>
+</div>
+
+</div>
+<div [@detailstate]="detailstate" style="display: block">
+<div style="width: 80%; margin: auto;">
+<div class='detailPageBtn' *ngIf="detailpage">
+<button class="btn btn-primary" (click)="gotoresult()"><i class="material-icons">keyboard_arrow_left</i>List</button>
+<div class='rightBtns'>
+  <a href='https://twitter.com/intent/tweet?text={{tweet(Hightlight)}}&hashtags=CSCI571EventSearch' target="_blank">
+  <img class="twitter-share-button" src="http://csci571.com/hw/hw8/Images/Twitter.png"></a>
+  <div (click)="favorite(Hightlight,'1')" class = "tstar"><i class="material-icons" >{{whichstar(Hightlight)}}</i>
+  </div>
+</div>
+</div>
+</div>
+<div *ngIf="detailpage">
+<app-details></app-details>
+</div></div>
